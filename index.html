@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shelf</title>
+<meta name="description" content="Shelf is a small, free iOS app for browsing a board game collection kept on BoardGameGeek.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --felt: #D9DFD2;
+    --card: #F4EFE3;
+    --ink: #1B1A17;
+    --ink-2: #5A5C53;
+    --edge: rgba(27,26,23,0.10);
+    --accent: #1B4DCC;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --felt: #0F1C1A;
+      --card: #1A2B28;
+      --ink: #F4EFE3;
+      --ink-2: #B3BDB5;
+      --edge: rgba(255,255,255,0.08);
+      --accent: #5B8DEF;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--felt);
+    color: var(--ink);
+    font: 18px/1.55 "Bricolage Grotesque", -apple-system, system-ui, sans-serif;
+  }
+  main { max-width: 880px; margin: 0 auto; padding: 56px 16px 40px; }
+  h1 { font-size: clamp(44px, 9vw, 68px); font-weight: 780; line-height: 1; margin: 0 0 16px; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; font-weight: 720; margin: 48px 0 12px; }
+  p { margin: 0 0 14px; max-width: 62ch; }
+  .lede { font-size: 21px; color: var(--ink-2); }
+  .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 40px 0 8px; }
+  .shots figure { margin: 0; }
+  .shots img {
+    width: 100%; height: auto; display: block;
+    border-radius: 22px; border: 1px solid var(--edge);
+  }
+  .shots figcaption { font-size: 15px; color: var(--ink-2); margin-top: 8px; }
+  .card {
+    background: var(--card); border: 1px solid var(--edge);
+    border-radius: 18px; padding: 20px 22px; margin-top: 12px;
+  }
+  ul { margin: 0; padding-left: 20px; }
+  li { margin: 6px 0; }
+  code { font-size: 0.9em; }
+  a { color: var(--accent); }
+  footer { font-size: 15px; color: var(--ink-2); margin-top: 56px; }
+  @media (max-width: 640px) {
+    .shots { grid-template-columns: 1fr; max-width: 320px; margin-inline: auto; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Shelf</h1>
+  <p class="lede">A small, free iOS app for browsing a board game collection on the phone, and for answering "what should we play tonight?"</p>
+  <p>The BoardGameGeek collection page is hard to use on a phone. Shelf shows the same collection as a grid of box covers, with a page per game and a Tonight screen that picks a game from player count, time and weight. I'm building it for myself and a few friends. It isn't on the App Store.</p>
+
+  <div class="shots">
+    <figure><img src="images/shelf.jpg" alt="The Shelf tab: a grid of game covers with a search field" loading="lazy"><figcaption>The shelf</figcaption></figure>
+    <figure><img src="images/tonight.jpg" alt="The Tonight tab suggesting Dominion for four players" loading="lazy"><figcaption>Tonight's pick</figcaption></figure>
+    <figure><img src="images/detail.jpg" alt="Catan's page with players, time, weight, rating and three expansions" loading="lazy"><figcaption>A game and its expansions</figcaption></figure>
+  </div>
+
+  <h2>How Shelf uses BoardGameGeek</h2>
+  <div class="card">
+    <p>Shelf reads from the BGG XML API only when the user asks it to:</p>
+    <ul>
+      <li>It imports the games a user owns, by BGG username (<code>collection</code>).</li>
+      <li>It searches for a game by name when adding one (<code>search</code>).</li>
+      <li>It reads each game's facts and cover once, up to 20 games per request, one request at a time (<code>thing</code>).</li>
+    </ul>
+  </div>
+  <p style="margin-top:16px">Everything is stored on the phone, and the app works offline after that. It never writes to BGG and never polls in the background. There are no accounts, ads, payments or analytics, and BGG data is never redistributed. Games can also be typed in by hand.</p>
+
+  <footer>
+    <p>Game data from <a href="https://boardgamegeek.com">BoardGameGeek</a>. Shelf is a personal project and is not affiliated with BGG.</p>
+  </footer>
+</main>
+</body>
+</html>
